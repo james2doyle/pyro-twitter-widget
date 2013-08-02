@@ -108,7 +108,6 @@ class Widget_TwitterWidget extends Widgets
 			"statuses/user_timeline" => "My Timeline",
 			"statuses/home_timeline" => "Home Timeline",
 			"statuses/retweets_of_me" => "My Retweets",
-			"followers/" => "List Of Followers",
 			"favorites/list" => "Your Favourites"
 			);
 		return array('rest_choice' => $rest_choice, 'options' => $options);
