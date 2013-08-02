@@ -1,0 +1,3 @@
+[submodule "lib/twitter-api-php"]
+	path = lib/twitter-api-php
+	url = git://github.com/J7mbo/twitter-api-php.git
