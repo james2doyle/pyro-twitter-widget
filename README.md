@@ -5,6 +5,8 @@ A twitter widget for PyroCMS. Supports oAuth v1.1 API. It uses [J7mbo/twitter-ap
 
 ![form.png](https://raw.github.com/james2doyle/pyro-twitter-widget/master/form.png)
 
+![restchoices.png](https://raw.github.com/james2doyle/pyro-twitter-widget/master/restchoices.png)
+
 ### Supported REST API Endpoints
 
 * statuses/mentions_timeline
