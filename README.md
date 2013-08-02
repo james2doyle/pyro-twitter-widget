@@ -3,7 +3,11 @@ pyro-twitter-widget
 
 A twitter widget for PyroCMS. Supports oAuth v1.1 API. It uses [J7mbo/twitter-api-php](https://github.com/J7mbo/twitter-api-php) for the oAuth and Twitter calls.
 
+##### Widget Form
+
 ![form.png](https://raw.github.com/james2doyle/pyro-twitter-widget/master/form.png)
+
+##### API Choices
 
 ![restchoices.png](https://raw.github.com/james2doyle/pyro-twitter-widget/master/restchoices.png)
 
