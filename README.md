@@ -144,7 +144,7 @@ Here is the basic display. You can overide this view in your theme or just custo
 </div>
 ```
 
-#### Contributions and Sources
+#### Helper Function Sources
 
 *_parse_tweet function*
 
