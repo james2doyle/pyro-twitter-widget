@@ -135,7 +135,7 @@ class Widget_TwitterWidget extends Widgets
 
 		if(empty($options['expiry'])){
 			$options['expiry'] = 120;
-		} elseif ($options['expiry'] == 0) {
+		} elseif ($options['expiry'] < 60) {
 			$options['expiry'] = 60;
 		}
 
