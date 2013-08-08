@@ -100,6 +100,16 @@ class Widget_TwitterWidget extends Widgets
 			'label' => 'Rest Choice',
 			'rules' => ''
 			),
+		array(
+			'field' => 'expiry',
+			'label' => 'Cache Expire (in seconds)',
+			'rules' => ''
+			),
+		array(
+			'field' => 'clear_cache',
+			'label' => 'Option to clear out the Cache',
+			'rules' => ''
+			)
 		);
 
 	public function form($options) {
@@ -110,6 +120,8 @@ class Widget_TwitterWidget extends Widgets
 			"statuses/retweets_of_me" => "My Retweets",
 			"favorites/list" => "Your Favourites"
 			);
+		$options['expiry'] = (empty($options['expiry'])) ? 60 : $options['expiry'];
+		$options['limit'] = (empty($options['limit'])) ? 20 : $options['limit'];
 		return array('rest_choice' => $rest_choice, 'options' => $options);
 	}
 
@@ -119,6 +131,16 @@ class Widget_TwitterWidget extends Widgets
 			$options['limit'] = 20;
 		} elseif ($options['limit'] == 0) {
 			$options['limit'] = 1;
+		}
+
+		if(empty($options['expiry'])){
+			$options['expiry'] = 120;
+		} elseif ($options['expiry'] == 0) {
+			$options['expiry'] = 60;
+		}
+
+		if ($options['clear_cache']) {
+			$this->pyrocache->delete('twitter_cache');
 		}
 		return $options;
 	}
@@ -188,14 +210,19 @@ class Widget_TwitterWidget extends Widgets
 			'consumer_key' => $options['consumer_key'],
 			'consumer_secret' => $options['consumer_secret']
 			);
-		require_once('lib/twitter-api-php/TwitterAPIExchange.php');
-		$url = 'https://api.twitter.com/1.1/'.$options['rest_choice'].'.json';
-		$getfield = '?screen_name='.$options['username'];
-		$requestMethod = 'GET';
-		$twitter = new TwitterAPIExchange($settings);
-		$tweets = $twitter->setGetfield($getfield)
-		->buildOauth($url, $requestMethod)
-		->performRequest();
+		if (!$data = $this->pyrocache->get('twitter_cache')) {
+			require_once('lib/twitter-api-php/TwitterAPIExchange.php');
+			$url = 'https://api.twitter.com/1.1/'.$options['rest_choice'].'.json';
+			$getfield = '?screen_name='.$options['username'];
+			$requestMethod = 'GET';
+			$twitter = new TwitterAPIExchange($settings);
+			$tweets = $twitter->setGetfield($getfield)
+			->buildOauth($url, $requestMethod)
+			->performRequest();
+			$this->pyrocache->write($tweets, 'twitter_cache', $options['expiry']);
+		} else {
+			$tweets = $this->pyrocache->get('twitter_cache');
+		}
 		$tweets = json_decode($tweets);
 		$tweets = array_slice($tweets, 0, $options['limit']);
 		foreach ($tweets as $tweet) {

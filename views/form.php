@@ -24,7 +24,15 @@
     <?php echo form_input('limit', $options['limit']); ?>
   </li>
   <li>
-    <label>Username</label>
+    <label>Username (without @)</label>
     <?php echo form_input('username', $options['username']); ?>
+  </li>
+  <li>
+    <label>Cache Expire (in seconds)</label>
+    <?php echo form_input('expiry', $options['expiry']); ?>
+  </li>
+  <li>
+    <label>Clear Cache (manually delete the cache so it can be reset)</label>
+    <?php echo form_checkbox('clear_cache', true, false); ?>
   </li>
 </ul>
