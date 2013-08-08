@@ -57,7 +57,7 @@ class Widget_TwitterWidget extends Widgets
 	 *
 	 * @var string
 	 */
-	public $version = '1.0';
+	public $version = '1.1';
 
 	/**
 	 * The fields for customizing the options of the widget.
