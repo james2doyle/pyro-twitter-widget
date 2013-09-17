@@ -190,7 +190,7 @@ class Widget_TwitterWidget extends Widgets
 			$text);
 		$text = preg_replace(
 			'/\s+#(\w+)/',
-			' <a target="_blank" title="#$1" href="http://search.twitter.com/search?q=%23$1">#$1</a>',
+			' <a target="_blank" title="#$1" href="https://twitter.com/search?q=%23$1&src=hash">#$1</a>',
 			$text);
 		return $text;
 	}
